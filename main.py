@@ -75,4 +75,4 @@ if __name__ == "__main__":
     print("---")
     print("Ready. Additional information can be found in the browser console on the page.")
     webbrowser.open_new_tab("http://127.0.0.1:5000/smonitoring") 
-    app.run(host="0.0.0.0")
+    app.run()
