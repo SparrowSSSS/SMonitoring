@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="http://127.0.0.1:5000//favicon.ico" type="image/x-icon">
+        <style>
+                .block {
+                        display: block;
+                }
+
+                .none {
+                        display: none;
+                }
+
+                .sel {
+                        padding: 5px;
+                        cursor: pointer;
+                }
+
+                .active {
+                        border: none;
+                        background-color: rgb(20, 88, 20);
+                }
+
+                .lang,
+                .region {
+                        display: flex;
+                        align-items: center;
+                }
+
+                .l_en,
+                .r_eu {
+                        margin-left: 5px;
+                }
+
+                .t {
+                        display: flex;
+                        align-items: center;
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                }
+
+                .lot {
+                        display: flex;
+                        align-items: center;
+                }
+
+                h4 {
+                        margin: 0;
+                        padding: 0;
+                }
+
+                .barrier {
+                        margin-left: 5px;
+                        margin-right: 5px;
+                        font-weight: bold;
+                }
+
+                p {
+                        font-size: 17px;
+                }
+
+                .info {
+                        position: absolute;
+                        left: 60%;
+                        top: 1%;
+                }
+        </style>
+        <title>SMonitoring</title>
+</head>
+
+<body>
+        <div class="lang">
+                <p class="s l_en block">Language -</p>
+                <p class="s l_ru none">Язык -</p>
+                <div class="sel l_en active">EN</div>
+                <div class="sel l_ru">RU</div>
+        </div>
+        <div class="region">
+                <p class="s l_en block">Region - </p>
+                <p class="s l_ru none">Регион - </p>
+                <div class="sel r_eu active">EU</div>
+                <div class="sel r_ru">RU</div>
+        </div>
+        <div class="none s l_ru info">
+                <p>Нажмите Сtrl + Shift + I, чтобы открыть консоль</p>
+                <p>Используйте Сtrl + F, для поиска</p>
+                <p>Дата и время последних предоставленных данных - {{ data[2] }}(данные обновляются примерно каждые 5 минут после запуска программы)</p>
+        </div>
+        <div class="block s l_en info">
+                <p>Press Ctrl + Shift + I to open the console</p>
+                <p>Use Ctrl + F to search</p>
+                <p>Date and time of the last data provided - {{ data[2] }}(data is updated approximately every 5 minutes after the program is launched)</p>
+        </div>
+        {% for item in data[0] %}
+        <div active_l="yes" active_region="yes" class="l_en r_eu block">
+                <div class="t">
+                        <img src="https://github.com/EXBO-Studio/stalcraft-database/raw/main/global{{ item[3] }}" />
+                        <h2>{{ item[1] }}; Category - {{ item[4] }}</h2>
+                </div>
+                <h4>{{ item[2]['total'] }} lots:</h4>
+                {% for lot in item[2]['lots'] %}
+                <div class="lot">
+                        <p>Start price - {{ lot['startPrice'] }}<span class="barrier">|</span></p>
+                        <p>Buyout price - {{ lot['buyoutPrice'] }}<span class="barrier">|</span>
+                        </p>
+                        <p>Start time - {{ lot['startTime'] }}<span class="barrier">|</span></p>
+                        <p>End time - {{ lot['endTime'] }}</p>
+                </div>
+                {% endfor %}
+        </div>
+        <div active_l="no" active_region="yes" class="l_ru r_eu none">
+                <div class="t">
+                        <img src="https://github.com/EXBO-Studio/stalcraft-database/raw/main/global{{ item[3] }}" />
+                        <h2>{{ item[0] }}; Категория - {{ item[4] }}</h2>
+                </div>
+                <h4>{{ item[2]['total'] }}:</h4>
+                {% for lot in item[2]['lots'] %}
+                <div class="lot">
+                        <p>Начальная цена - {{ lot['startPrice'] }}<span class="barrier">|</span>
+                        </p>
+                        <p>Цена выкупа - {{ lot['buyoutPrice'] }}<span class="barrier">|</span>
+                        </p>
+                        <p>Время старта - {{ lot['startTime'] }}<span class="barrier">|</span></p>
+                        <p>Время окончания - {{ lot['endTime'] }}</p>
+                </div>
+                {% endfor %}
+        </div>
+        {% endfor %}
+        {% for item in data[1] %}
+        <div active_l="yes" active_region="no" class="l_en r_ru none">
+                <div class="t">
+                        <img src="https://github.com/EXBO-Studio/stalcraft-database/raw/main/ru{{ item[3] }}" />
+                        <h2>{{ item[1] }}; Category - {{ item[4] }}</h2>
+                </div>
+                <h4>{{ item[2]['total'] }} lots:</h4>
+                {% for lot in item[2]['lots'] %}
+                <div class="lot">
+                        <p>Start price - {{ lot['startPrice'] }}<span class="barrier">|</span></p>
+                        <p>Buyout price - {{ lot['buyoutPrice'] }}<span class="barrier">|</span>
+                        </p>
+                        <p>Start time - {{ lot['startTime'] }}<span class="barrier">|</span></p>
+                        <p>End time - {{ lot['endTime'] }}</p>
+                </div>
+                {% endfor %}
+        </div>
+        <div active_l="no" active_region="no" class="l_ru r_ru none">
+                <div class="t">
+                        <img src="https://github.com/EXBO-Studio/stalcraft-database/raw/main/ru{{ item[3] }}" />
+                        <h2>{{ item[0] }}; Категория - {{ item[4] }}</h2>
+                </div>
+                <h4>{{ item[2]['total'] }}:</h4>
+                {% for lot in item[2]['lots'] %}
+                <div class="lot">
+                        <p>Начальная цена - {{ lot['startPrice'] }}<span class="barrier">|</span>
+                        </p>
+                        <p>Цена выкупа - {{ lot['buyoutPrice'] }}<span class="barrier">|</span>
+                        </p>
+                        <p>Время старта - {{ lot['startTime'] }}<span class="barrier">|</span></p>
+                        <p>Время окончания - {{ lot['endTime'] }}</p>
+                </div>
+                {% endfor %}
+        </div>
+        {% endfor %}
+        <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+        <script>
+                console.log("Welcome to SMonitoring");
+                console.log("---");
+                console.log("List of categories:");
+                console.log("armor(clothes, combat, combined, device, discoverer, scientist), artefact(biochemical, electrophysical, gravity, other_arts, thermal), attachment(barrel, butt, collimator_sights, forend, mag, other, pistol_handle), backpack, bullet, containers, grenade, medicine, weapon(assault_rifle, device, heavy, machine_gun, melee, pistol, shotgun_rifle, sniper_rifle, submachine_gun)");
+                console.log("---");
+                $(".sel.l_ru").click(function () {
+                        $(".sel.l_ru").addClass("active");
+                        $(".sel.l_en").removeClass("active");
+                        $(".s.l_ru").addClass("block");
+                        $(".s.l_ru").removeClass("none");
+                        $(".s.l_en").addClass("none");
+                        $(".s.l_en").removeClass("block");
+                        $(".l_ru[active_region='yes']").addClass("block");
+                        $(".l_ru[active_region='yes']").removeClass("none");
+                        $(".l_en[active_region='yes']").addClass("none");
+                        $(".l_en[active_region='yes']").removeClass("block");
+                        $(".l_ru[active_l='no']").attr('active_l', 'yes');
+                        $(".l_en[active_l='yes']").attr('active_l', 'no');
+                });
+                $(".sel.l_en").click(function () {
+                        $(".sel.l_en").addClass("active");
+                        $(".sel.l_ru").removeClass("active");
+                        $(".s.l_en").addClass("block");
+                        $(".s.l_en").removeClass("none");
+                        $(".s.l_ru").addClass("none");
+                        $(".s.l_ru").removeClass("block");
+                        $(".l_en[active_region='yes']").addClass("block");
+                        $(".l_en[active_region='yes']").removeClass("none");
+                        $(".l_ru[active_region='yes']").addClass("none");
+                        $(".l_ru[active_region='yes']").removeClass("block");
+                        $(".l_en[active_l='no']").attr('active_l', 'yes');
+                        $(".l_ru[active_l='yes']").attr('active_l', 'no');
+                });
+                $(".sel.r_ru").click(function () {
+                        $(".sel.r_ru").addClass("active");
+                        $(".sel.r_eu").removeClass("active");
+                        $(".r_ru[active_l='yes']").addClass("block");
+                        $(".r_ru[active_l='yes']").removeClass("none");
+                        $(".r_eu[active_l='yes']").addClass("none");
+                        $(".r_eu[active_l='yes']").removeClass("block");
+                        $(".r_ru[active_region='no']").attr('active_region', 'yes');
+                        $(".r_eu[active_region='yes']").attr('active_region', 'no');
+                });
+                $(".sel.r_eu").click(function () {
+                        $(".sel.r_eu").addClass("active");
+                        $(".sel.r_ru").removeClass("active");
+                        $(".r_eu[active_l='yes']").addClass("block");
+                        $(".r_eu[active_l='yes']").removeClass("none");
+                        $(".r_ru[active_l='yes']").addClass("none");
+                        $(".r_ru[active_l='yes']").removeClass("block");
+                        $(".r_eu[active_region='no']").attr('active_region', 'yes');
+                        $(".r_ru[active_region='yes']").attr('active_region', 'no');
+                });
+        </script>
+</body>
+
+</html>
