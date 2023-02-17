@@ -105,7 +105,8 @@
                         <p>Buyout price - {{ lot['buyoutPrice'] }}<span class="barrier">|</span>
                         </p>
                         <p>Start time - {{ lot['startTime'] }}<span class="barrier">|</span></p>
-                        <p>End time - {{ lot['endTime'] }}</p>
+                        <p>End time - {{ lot['endTime'] }}<span class="barrier">|</span></p>
+                        <p>Quality - {{ lot['additional']['qlt'] }}</p>
                 </div>
                 {% endfor %}
         </div>
@@ -122,7 +123,8 @@
                         <p>Цена выкупа - {{ lot['buyoutPrice'] }}<span class="barrier">|</span>
                         </p>
                         <p>Время старта - {{ lot['startTime'] }}<span class="barrier">|</span></p>
-                        <p>Время окончания - {{ lot['endTime'] }}</p>
+                        <p>Время окончания - {{ lot['endTime'] }}<span class="barrier">|</span></p>
+                        <p>Качество - {{ lot['additional']['qlt'] }}</p>
                 </div>
                 {% endfor %}
         </div>
@@ -140,7 +142,8 @@
                         <p>Buyout price - {{ lot['buyoutPrice'] }}<span class="barrier">|</span>
                         </p>
                         <p>Start time - {{ lot['startTime'] }}<span class="barrier">|</span></p>
-                        <p>End time - {{ lot['endTime'] }}</p>
+                        <p>End time - {{ lot['endTime'] }}<span class="barrier">|</span></p>
+                        <p>Quality - {{ lot['additional']['qlt'] }}</p>
                 </div>
                 {% endfor %}
         </div>
@@ -157,7 +160,8 @@
                         <p>Цена выкупа - {{ lot['buyoutPrice'] }}<span class="barrier">|</span>
                         </p>
                         <p>Время старта - {{ lot['startTime'] }}<span class="barrier">|</span></p>
-                        <p>Время окончания - {{ lot['endTime'] }}</p>
+                        <p>Время окончания - {{ lot['endTime'] }}<span class="barrier">|</span></p>
+                        <p>Качество - {{ lot['additional']['qlt'] }}</p>
                 </div>
                 {% endfor %}
         </div>
@@ -167,7 +171,8 @@
                 console.log("Welcome to SMonitoring");
                 console.log("---");
                 console.log("List of categories:");
-                console.log("armor(clothes, combat, combined, device, discoverer, scientist), artefact(biochemical, electrophysical, gravity, other_arts, thermal), attachment(barrel, butt, collimator_sights, forend, mag, other, pistol_handle), backpack, bullet, containers, grenade, medicine, weapon(assault_rifle, device, heavy, machine_gun, melee, pistol, shotgun_rifle, sniper_rifle, submachine_gun)");
+                console.log(
+                        "armor(clothes, combat, combined, device, discoverer, scientist), artefact(biochemical, electrophysical, gravity, other_arts, thermal), attachment(barrel, butt, collimator_sights, forend, mag, other, pistol_handle), backpack, bullet, containers, grenade, medicine, weapon(assault_rifle, device, heavy, machine_gun, melee, pistol, shotgun_rifle, sniper_rifle, submachine_gun)");
                 console.log("---");
                 $(".sel.l_ru").click(function () {
                         $(".sel.l_ru").addClass("active");
